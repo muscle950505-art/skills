@@ -1,321 +1,74 @@
 <div align="center">
+  <h1>🛠️ AlphaGBM Skills: AI 量化投研与期权分析框架</h1>
+  
+  <p>专业的金融量化 Agent 技能库 (Skills) 与本地命令行 (CLI) 终端工具</p>
 
-# AlphaGBM Skills
+  <!-- 核心引流按钮：极客风格徽章，高点击率 -->
+  <a href="https://www.alphagbm.com/" target="_blank">
+    <img src="https://img.shields.io/badge/🚀_免本地部署_开箱即用-访问_AlphaGBM_全功能网页工作台-0052FF?style=for-the-badge&logo=googlechrome&logoColor=white" alt="AlphaGBM Web Workspace">
+  </a>
+  <a href="https://t.zsxq.com/38xGE" target="_blank">
+    <img src="https://img.shields.io/badge/🌍_每日实盘与AI复盘-加入_AlphaGBM_投研圈-07C160?style=for-the-badge&logo=wechat&logoColor=white" alt="Knowledge Planet">
+  </a>
+</div>
 
-**See what options are pricing in — with real data, not guesswork.**
+<br>
 
-*29 AI skills for options & research intelligence · Built on real market data · Trusted by 10,000+ traders*
-
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Skills](https://img.shields.io/badge/skills-29-green.svg)](#skills-overview) [![Users](https://img.shields.io/badge/users-10K%2B-orange.svg)](https://alphagbm.com)
-
-[Website](https://alphagbm.com) · [Documentation](#skills-overview) · [Quick Start](#quick-start) · [Contributing](CONTRIBUTING.md)
+> ### 🛑 给投资者的温馨提示
+> 本开源仓库主要为您提供底层的 **AI 投研提示词（Skills）** 与 **本地 CLI 开发环境**，适合有 Python 基础的量化极客（Quants）和开发者。
+> 
+> **如果您不想折腾环境配置、API 密钥，希望能把精力 100% 专注在交易本身上：**
+> 
+> **强烈建议您直接使用我们的 👉 [AlphaGBM 网页端云工作台](https://www.alphagbm.com/)**！网页端不仅完美内置了本仓库所有的分析模块，还独家集成了：
+> * 🌐 **四大市场实时数据统一分析**（美股·港股·A股·商品期货）
+> * 🧠 **前沿大模型智能路由**（聚合 Gemini / Claude / GPT 等最强算力）
+> * 📖 **AI 自动归档知识库**（按股票 Ticker 自动整理您的复盘笔记与资讯）
 
 ---
 
-<!-- TODO: Replace with actual screenshot of CLI/agent output -->
-<img src="assets/demo-screenshot.png" alt="AlphaGBM options analysis output" width="720">
-
-### 30-Second Demo
-
-```bash
-git clone https://github.com/AlphaGBM/skills.git .claude/skills/alphagbm
-```
-
-Then ask your AI: *"Analyze AAPL options using AlphaGBM"* — works instantly with built-in data, no API key needed.
-
-</div>
-
-## What is AlphaGBM?
-
-AlphaGBM is a **real-data options & research intelligence layer** for traders and AI agents. Every number comes from real market data -- IV, Greeks, VRP, skew, flow, plus a tracked research workspace -- not LLM hallucination.
-
-These 26 skills bring AlphaGBM's capabilities into your AI workflow: Claude Code, Cursor, Windsurf, or any agent that supports skills.
-
-### Why AlphaGBM?
-
-| | LLM Roleplay Tools | Generic Finance APIs | **AlphaGBM** |
-|--|-------------------|---------------------|-------------|
-| Data Source | LLM-generated | Delayed/basic | **Real-time options data** |
-| Verifiable | "85% confidence" | Partial | **Every number has a source** |
-| Options Depth | None | Basic chain | **IV/HV/VRP/Greeks/Skew/Surface** |
-| Scoring | Subjective | None | **Quantitative scoring (0-100 options, 1-10 stocks)** |
-| Analysis Model | None | None | **G = B + M (Gain = Basics + Momentum)** |
-| Battle-tested | No | Varies | **10K users, 3mo live trading** |
-| Coverage | US only | Varies | **US + HK + CN + Commodities** |
-
-## Quick Start
-
-### Install as Claude Code Skills
-
-```bash
-# Clone into your project
-git clone https://github.com/AlphaGBM/skills.git .claude/skills/alphagbm
-
-# Or add as submodule
-git submodule add https://github.com/AlphaGBM/skills.git .claude/skills/alphagbm
-```
-
-### Install for Cursor
-
-```bash
-git clone https://github.com/AlphaGBM/skills.git .cursor/skills/alphagbm
-```
-
-### Install CLI
-
-```bash
-# Clone and install
-git clone https://github.com/AlphaGBM/skills.git
-cd skills/cli
-pip install -e .
-
-# Set your API key
-alphagbm config set-key agbm_xxxxxxxxxxxxxxxx
-
-# Start analyzing
-alphagbm stock analyze AAPL
-alphagbm options score NVDA
-```
-
-See [cli/README.md](cli/README.md) for full CLI documentation.
-
-### Try It (No API Key Needed)
-
-All skills include built-in demo data for AAPL, NVDA, SPY, TSLA, and META. Just ask your AI:
-
-> "Analyze AAPL stock using AlphaGBM"
-> "Score NVDA options"
-> "Show me TSLA's volatility surface"
-> "What's the best bullish strategy for META?"
-
-### Connect Live Data
-
-```bash
-# Set your API key for real-time data
-export ALPHAGBM_API_KEY=agbm_xxxxxxxxxxxxxxxx
-export ALPHAGBM_BASE_URL=https://alphagbm.zeabur.app  # optional, this is the default
-
-# Get your free key at https://alphagbm.com/api-keys
-```
-
-### Check API Health
-
-```bash
-curl https://alphagbm.zeabur.app/api/health
-```
-
-Returns API status, available data fields, data source health, and market coverage — no auth needed. Useful for AI agents to verify what's available before making calls.
-
-### Quota
-
-| Plan | Stock Analysis | Options Analysis | Quick Quote / Snapshot |
-|------|---------------|-----------------|----------------------|
-| Free | 2/day | 1/day | Unlimited |
-| Plus | 1,000/month | 1,000/month | Unlimited |
-| Pro | 5,000/month | 5,000/month | Unlimited |
-
-## Skills Overview
-
-### Core Analysis (7 skills)
-
-| Skill | What It Does | Example Query |
-|-------|-------------|---------------|
-| [**Stock Analysis**](skills/alphagbm-stock-analysis/) | G=B+M model: fundamentals, momentum, EV, risk score, AI report | "Analyze AAPL" |
-| [**Options Score**](skills/alphagbm-options-score/) | Score 0-100 across 4 strategies (Sell Put/Call, Buy Put/Call) | "Best NVDA call to buy" |
-| [**Options Strategy**](skills/alphagbm-options-strategy/) | Strategy builder + scanner with 15+ templates | "Bullish play on TSLA" |
-| [**Vol Surface**](skills/alphagbm-vol-surface/) | 3D implied volatility across strikes & expiries | "Is AAPL IV expensive?" |
-| [**Vol Smile**](skills/alphagbm-vol-smile/) | Skew analysis for a single expiration | "NVDA put skew" |
-| [**Greeks**](skills/alphagbm-greeks/) | Greeks calculator + implied volatility solver | "Greeks for AAPL 220C" |
-| [**P&L Simulator**](skills/alphagbm-pnl-simulator/) | What-if analysis for any position | "Simulate my iron condor" |
-
-### Data Intelligence (6 skills)
-
-| Skill | What It Does | Example Query |
-|-------|-------------|---------------|
-| [**IV Rank**](skills/alphagbm-iv-rank/) | IV percentile vs. 252-day history | "Is TSLA IV high?" |
-| [**Earnings IV Panel**](skills/alphagbm-earnings-crush/) | Crush history + implied move + IV Rank tag + priced Iron Condor | "Iron Condor for META earnings" |
-| [**Unusual Activity**](skills/alphagbm-unusual-activity/) | Smart money / large block detection | "Unusual options flow today" |
-| [**Market Sentiment**](skills/alphagbm-market-sentiment/) | VIX, Put/Call, Fear & Greed dashboard | "Market sentiment now" |
-| [**VIX Status**](skills/alphagbm-vix-status/) ✨ | 5-tier fear thermometer: calm / normal / seller sweet spot / caution / extreme fear | "Is this a good time for BPS?" |
-| [**FearScore**](skills/alphagbm-fear-score/) ✨ | Per-ticker 6-indicator panic composite; ≥60 is BPS entry signal | "Fear score QQQ", "is NVDA oversold" |
-
-### Workflow Tools (4 skills)
-
-| Skill | What It Does | Example Query |
-|-------|-------------|---------------|
-| [**Compare**](skills/alphagbm-compare/) | Side-by-side stock & options comparison | "AAPL vs MSFT" |
-| [**Watchlist**](skills/alphagbm-watchlist/) | Monitor tickers for key changes | "Add NVDA to watchlist" |
-| [**Alert**](skills/alphagbm-alert/) | Set IV, price, or activity alerts | "Alert if TSLA IV > 80" |
-| [**Polymarket**](skills/alphagbm-polymarket/) | Prediction market vs. options pricing | "Rate cut odds vs options" |
-
-### Risk & Portfolio Discipline (3 skills) ✨
-
-Exit, hedge, and sizing decisions quantified from real data — not opinion.
-
-| Skill | What It Does | Example Query |
-|-------|-------------|---------------|
-| [**Hedge Advisor**](skills/alphagbm-hedge-advisor/) ✨ | Scenario-driven hedge for an existing position (Falling Knife / Bottom Fishing / Gain Protection); returns priced Long Put / Collar / Tier-down specs | "Hedge my AAPL at cost 140, now 180" |
-| [**BPS Backtest**](skills/alphagbm-bps-backtest/) ✨ | Walk-forward backtest of Bull Put Spread with signal vs no-signal control in one call | "Backtest BPS on QQQ — does FearScore work?" |
-| [**Take-Profit Lab**](skills/alphagbm-take-profit/) ✨ | Any-ticker 15-strategy exit backtest; auto-classifies whether it's holdable or needs tiered exit via a novel "rollercoaster rate" metric | "Should I hold TQQQ long-term?" |
-
-### Investor Masters (4 skills) 🎓
-
-Mechanical translations of specific investors' philosophies into one-call tools.
-
-| Skill | What It Does | Example Query |
-|-------|-------------|---------------|
-| [**Duan-Yongping Analysis**](skills/alphagbm-duan-analysis/) | Three-panel seller playbook (Sell Put at willing-buy price / Covered Call yield / VIX-tier panic-buy context) | "Duan-style analysis on AAPL" |
-| [**Buffett Analysis**](skills/alphagbm-buffett-analysis/) ✨ | 4-lens scorecard (business / moat / management / valuation) → weighted HOLDABLE / WATCHABLE / AVOID verdict for any ticker | "Buffett analysis on KO" |
-| [**Marks Cycle**](skills/alphagbm-marks-cycle/) ✨ | Howard Marks-style cycle position 0-100 blending VIX + IV Rank + P/C + valuation; maps to offense/defense posture. Free, no auth | "Where are we in the cycle?" |
-| [**Tepper Signal**](skills/alphagbm-tepper-signal/) ✨ | Quantified Tepper 2009/2020 panic-buy detector: VIX ≥ 35 + FearScore ≥ 80 + quality filter → armed/watch/near/cold | "Is this a Tepper buy signal?" |
-
-### Knowledge Base — Research Brain (5 skills)
-
-Build a personal, monitored research workspace. Profiles auto-refresh, theses get checked against triggers, the system audits itself weekly.
-
-| Skill | What It Does | Example Query |
-|-------|-------------|---------------|
-| [**Company Profile**](skills/alphagbm-company-profile/) | Auto-built research files: fundamentals, PE/PB band, red flags, event radar | "Add NVDA to my knowledge base" |
-| [**Investment Thesis**](skills/alphagbm-investment-thesis/) | Buy reasons + structured sell triggers, monitored automatically | "Why did I buy AAPL?" |
-| [**Macro View**](skills/alphagbm-macro-view/) | Track VIX / US10Y / DXY / gold with portfolio-aware impact analysis | "Track VIX and US10Y" |
-| [**Theme Research**](skills/alphagbm-theme-research/) | Group tickers into themes (AI infra, HK dividend) + news keyword watching | "Create an AI infra theme" |
-| [**Health Check**](skills/alphagbm-health-check/) | Weekly audit: stale profiles, thesis drift, orphan pages → 0-100 score | "Audit my research brain" |
-
-### See Also
-
-- **[Investment Masters](https://github.com/AlphaGBM/investment-masters)** -- 12 masters' methodologies (Buffett, Dalio, Soros, Marks, Liang Wenfeng, Raschke...) + 13F tracking
-
-## Architecture
-
-```
-You / Your AI Agent
-    |  (natural language)
-+------------------------------------------------------+
-|              AlphaGBM Skills (this repo)              |
-|                                                       |
-|  Stock    Options   Vol      Strategy   Greeks   ...  |
-|  Analysis  Score   Surface   Builder    Dashboard     |
-+-------------------------+-----------------------------+
-                          |
-               +----------+----------+
-               v                     v
-         Mock Data              AlphaGBM API
-      (built-in, free)      (alphagbm.zeabur.app)
-                             Real-time market data
-                             IV/HV/VRP/Greeks/Skew
-```
-
-### How Skills Connect
-
-Skills aren't isolated -- they reference each other to form a complete workflow:
-
-```
-Stock Analysis --> Options Score --> Options Strategy --> P&L Simulator
-       |                |                    |
-       v                v                    v
-   Compare          Vol Surface           Greeks
-                    Vol Smile
-                    IV Rank --> Earnings Crush
-
-Market Sentiment --> Unusual Activity --> Alert
-                                          Watchlist
-
-Polymarket --> Market Sentiment --> Options Strategy
-```
-
-## Data Coverage
-
-| Market | Stocks | Options | Data Points |
-|--------|--------|---------|-------------|
-| US | 200+ | Full chains | IV/HV/VRP/Greeks/Skew/Surface |
-| HK | 35+ | Full chains | IV/HV/VRP/Greeks |
-| CN | 20+ ETFs | Full chains | IV/HV/VRP/Greeks |
-| Commodities | Au/Ag/Cu/Al | Futures options | IV/Greeks/Delivery risk |
-
-## Real Data, Not Guesswork
-
-Every number in AlphaGBM is **verifiable**:
-
-| Metric | Value | How It's Computed |
-|--------|-------|-------------------|
-| **IV** | 32.5% | Black-Scholes on actual bid/ask prices |
-| **IV Rank** | 58 | Current IV vs. 252 trading days of history |
-| **VRP** | +4.0% | `Implied Vol - Historical Vol` — measures option overpricing |
-| **Option Score** | 80/100 | Weighted: premium yield + support/resistance + safety margin + trend + PoP + liquidity + time decay |
-| **Stock Score** | 7.0/10 | `G = B + M` — Basics (PE, PEG, growth, margins) + Momentum (VIX, technicals, flow) |
-| **Risk** | 4/10 | Additive: valuation +2, growth +2, liquidity +2, market +1.5, technical +1 |
-| **EV** | +5.2% | `50% × 1w + 30% × 1m + 20% × 3m` expected value |
-
-This is not *"based on my training data"* or *"I estimate with 85% confidence."*
-
-This is math on market data.
-
-## Example Workflow
-
-> **You**: "Analyze AAPL, then find the best options play"
-
-The agent chains skills automatically:
-
-```
-1. GET  /api/stock/quick-quote/AAPL          → $261.40 (-0.8%)
-2. POST /api/stock/analyze-sync              → G=B+M score 7.0/10, EV +5.2%, BUY
-   {"ticker": "AAPL", "style": "balanced"}     Risk 4/10, target $275, stop-loss $239
-
-3. GET  /api/options/snapshot/AAPL           → IV 32.5%, IV Rank 58, VRP +4.0%
-4. POST /api/options/chain-sync              → Sell Put scores: 80, 78, 75...
-   {"symbol": "AAPL", "expiry_date": "..."}    Buy Call scores: 76, 74, 72...
-
-5. POST /api/options/tools/strategy/build    → Bull Call Spread 265/280
-   {"template_id": "bull_call_spread"}         Max profit $1085, max loss $415
-
-6. POST /api/options/tools/simulate          → Breakeven $269.15, PoP 44.5%
-   {"symbol": "AAPL", "legs": [...]}
-```
-
-> **You**: "Is that IV expensive?"
-
-```
-7. GET  /api/options/snapshot/AAPL           → IV Rank 58 (moderate)
-8. GET  /api/options/tools/vol-surface/AAPL  → ATM IV in contango, earnings in 26d
-```
-
-All from real API calls. All verifiable.
-
-## Roadmap
-
-- [x] 29 Skills with mock data
-- [x] Claude Code & Cursor support
-- [x] CLI tool (`pip install -e ./cli`)
-- [ ] Real-time WebSocket feeds
-- [ ] Community strategy sharing
-- [ ] More markets (EU, JP, KR options)
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines. We welcome:
-
-- Bug reports & feature requests
-- Skill improvements & new skill proposals
-- Translations (currently EN + CN)
-- Mock data for additional tickers
-
-## License
-
-MIT -- see [LICENSE](LICENSE).
-
-## Links
-
-- [alphagbm.com](https://alphagbm.com) -- Full platform with live data
-- [API Documentation](https://alphagbm.com/docs)
-- [Discord Community](https://discord.gg/alphagbm)
-- [Twitter/X](https://x.com/alphagbm)
+## 🧰 核心 AI 投研 Skills 模块目录
+
+我们已将资深交易员的分析逻辑封装为高度模块化的 Skills。所有文件均位于 [`skills/`](./skills) 目录下：
+
+### 📈 期权与波动率分析 (Options & Volatility)
+* `alphagbm-greeks`: 期权希腊字母深度诊断与风险暴露拆解
+* `alphagbm-vol-smile`: 波动率微笑曲线异常检测与套利机会识别
+* `alphagbm-vol-surface`: 波动率曲面立体变动分析
+* `alphagbm-iv-rank`: 隐含波动率百分位 (IVR/IVP) 评估
+* `alphagbm-options-strategy`: 多腿期权策略智能生成与评估
+* `alphagbm-options-score`: 期权多维度综合打分
+* `alphagbm-unusual-activity`: 期权异动大单（Unusual Options Activity）追踪
+* `alphagbm-pnl-simulator`: 期权策略到期盈亏 (PnL) 情景模拟推演
+
+### 👑 大师投资框架 (Investment Masters)
+* `alphagbm-buffett-analysis`: 巴菲特视角（自由现金流、ROE、宽广护城河体检）
+* `alphagbm-duan-analysis`: 段永平视角（商业模式理解与绝对估值）
+* `alphagbm-marks-cycle`: 霍华德·马克斯（宏观市场周期与钟摆位置定位）
+
+### 🛡️ 风控与市场情绪信号 (Risk & Sentiment)
+* `alphagbm-hedge-advisor`: 针对当前持仓组合的智能对冲保护建议
+* `alphagbm-take-profit`: 动态止盈与仓位退出策略评估
+* `alphagbm-fear-score` / `vix-status`: 结合 VIX 指数的恐慌/贪婪水位预警
+* `alphagbm-tepper-signal`: 大卫·泰珀（David Tepper）宏观流动性信号
+* `alphagbm-earnings-crush`: 财报季 IV Crush（波动率回归）风险评估
+* `alphagbm-chokepoint` / `alert`: 关键支撑阻力位识别与交易信号警报
+
+### 📊 股票基本面与宏观研究 (Equities & Macro)
+* `alphagbm-stock-analysis` / `company-profile`: 股票全方位体检与商业模式画像
+* `alphagbm-macro-view`: 宏观经济数据解读与大类资产配置视图
+* `alphagbm-theme-research` / `compare`: 主题赛道研究与多标的横向对比
+* `alphagbm-bps-backtest`: BPS 策略回测逻辑支持
 
 ---
 
-<div align="center">
+## 💻 本地 CLI 部署与使用指南 (Local Deployment)
 
-**Built by the [AlphaGBM](https://alphagbm.com) team. Trusted by 10,000+ traders worldwide.**
+本仓库提供了一个纯本地运行的终端分析工具：`alphagbm_cli`。
 
-*Real data. Real signals. Real edge.*
+### 1. 环境准备
+确保您的本地环境已安装 **Python 3.8+**。建议使用虚拟环境（venv 或 conda）。
 
-</div>
+### 2. 克隆仓库
+```bash
+git clone [https://github.com/AlphaGBM/skills.git](https://github.com/AlphaGBM/skills.git)
+cd skills
